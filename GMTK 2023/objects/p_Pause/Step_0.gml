@@ -1,0 +1,1 @@
+if (!global.pause) perform_step();
