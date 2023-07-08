@@ -22,7 +22,8 @@ check_player_near = function() {
 	var _player_near = false;
 	if (instance_exists(o_Player)) {
 		var _p = o_Player;
-		_player_near = check_swing(_p.bbox_left,_p.bbox_right,_p.bbox_top,_p.bbox_bottom,color_extra);
+		_player_near = (o_Player.my_swing == id)
+		|| (check_swing(_p.bbox_left,_p.bbox_right,_p.bbox_top,_p.bbox_bottom,color_extra));
 	}
 	if (_player_near) color = color_active;
 	else color = color_default;

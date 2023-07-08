@@ -45,6 +45,7 @@ draw_hair = function() {#region
 		var _angle = angle_normalize(point_direction(my_swing.x,my_swing.y,draw_x,draw_y) + 90);
 		var _yscale = _length/draw_hair_length;
 		draw_sprite_ext(s_PlayerHair,0,my_swing.x,my_swing.y,1,_yscale,_angle,image_blend,image_alpha);
+		draw_sprite(s_Swing,0,my_swing.x,my_swing.y);
 	}
 #endregion
 }
@@ -56,7 +57,7 @@ move_gravity = 0.2;
 move_gravity_total = 0;
 move_gravity_max_up = 0.3;
 move_gravity_max_down = 0.4;
-jump_power = -8;
+jump_power = -7;
 jump_max = 1;
 jump_left = jump_max;
 swing_power = 12;
@@ -64,6 +65,8 @@ my_swing = noone;
 swing_struct = sine_wave_create(90,60); // set wave to +/-90(deg). Full cycle takes 90 frames
 jump_cd_max = 0; // how long after swing before player can input a jump
 jump_cd = 0;
+release_cd_max = 10; // how long after grabbing a swing before you can let go.
+release_cd = release_cd_max;
 swing_forgiveness = 0.4;//prevents player from launching downwards if they barely miss the top of the swing
 swing_f_back = .1; //how far back to go from f_min after missing a swing.
 swing_f_min1 = pi/2;
@@ -93,16 +96,23 @@ change_state = function(_state){#region
 			move_gravity_total = 0;
 			jump_left = jump_max;
 			movement_stop(AXIS.Y);
+			// CAMERA UPDATE
+			var _id = id;
+			o_Camera.camera_follow(_id);
 		break;
 		case PLAYER_MOVE_STATE.AIR:
 			if (draw_angle >= 180) draw_angle -= 360; //prevents a 359 angle from rotating the long ways around.
 			draw_angle_target = 0;
 			my_swing = noone;
 			squash_scale(scale_struct);
+			// CAMERA UPDATE
+			var _id = id;
+			o_Camera.camera_follow(_id);
 		break;
 		case PLAYER_MOVE_STATE.SWING:
 			squash_scale(scale_struct);
 			swing_control_cd = 0;
+			release_cd = release_cd_max;
 			draw_swing_snap_time = draw_swing_snap_time_max;
 			draw_swing_snap_lerp = draw_swing_snap_lerp_base;
 			move_gravity_total = 0;
@@ -116,6 +126,8 @@ change_state = function(_state){#region
 				var _swingr = radius;
 				var _swingrcol = col_radius;
 			}
+			// CAMERA UPDATE
+			o_Camera.camera_follow(my_swing);
 			// NEW POS GET
 			// MUST USE COL radius for this or else the player will snap to the wrong place
 			// when collision picks it up but it's outside the actual rotation radius
@@ -218,7 +230,7 @@ perform_swing = function() {#region
 		var _swingr = radius;
 	}
 	
-	if (key_action) {
+	if (key_action) && (release_cd <=0) {
 		// Leniency to prevent player from launching downwards if they barely miss the top of the swing
 		var _adj = false;
 		if (within_range(swing_struct.progress,swing_f_min1,swing_f_max1)) {
@@ -302,6 +314,8 @@ perform_step = function() {
 			sine_wave_step(swing_struct);
 			
 			perform_swing();
+			// TIMERS
+			if (release_cd > 0) release_cd -= 1;
 			//if (within_range(swing_struct.progress,swing_f_min1,swing_f_max1)) debug_draw = true;
 			//else debug_draw = false;
 		break;

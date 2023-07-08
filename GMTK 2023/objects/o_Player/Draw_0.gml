@@ -1,5 +1,5 @@
 draw_hair();
-scale_draw_ext(scale_struct,sprite_index,0,draw_x,draw_y,1,1,draw_angle,image_blend,image_alpha);
+scale_draw_ext(scale_struct,sprite_index,image_index,draw_x,draw_y,1,1,draw_angle,image_blend,image_alpha);
 if (debug_mode) {
 	scale_draw_ext(scale_struct,s_PlayerDebug,0,x,y,1,1,draw_angle,image_blend,image_alpha);
 	draw_set_color(col_white);
