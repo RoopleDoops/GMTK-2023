@@ -6,6 +6,7 @@ movement_create();
 ////////////////////////////////
 // DRAWING
 scale_struct = scale_create();
+debug_draw = false;
 draw_x = x;
 draw_y = y;
 draw_angle = 0;
@@ -63,7 +64,7 @@ my_swing = noone;
 swing_struct = sine_wave_create(90,60); // set wave to +/-90(deg). Full cycle takes 90 frames
 jump_cd_max = 0; // how long after swing before player can input a jump
 jump_cd = 0;
-swing_forgiveness = 0.4;//prevents player from launching downwards if they barely miss the top of the swing
+swing_forgiveness = 0.6;//prevents player from launching downwards if they barely miss the top of the swing
 swing_f_min1 = pi/2;
 swing_f_max1 = pi/2 + swing_forgiveness;
 swing_f_min2 = 3*pi/2;
@@ -209,6 +210,8 @@ get_swing_angle = function() {
 
 perform_swing = function() {#region
 	swing_snap();
+	if (within_range(swing_struct.progress,swing_f_min1,swing_f_max1)) debug_draw = true;
+	else debug_draw = false;
 	get_swing_angle(); //updates draw angle of player
 	with (my_swing) {
 		var _swingx = x;
@@ -220,14 +223,14 @@ perform_swing = function() {#region
 		// Leniency to prevent player from launching downwards if they barely miss the top of the swing
 		var _adj = false;
 		if (within_range(swing_struct.progress,swing_f_min1,swing_f_max1)) {
-			swing_struct.progress = swing_f_min1-swing_forgiveness;
+			sine_wave_set(swing_struct,swing_f_min1-swing_forgiveness);
 			_adj = true;
 		}
 		else if (within_range(swing_struct.progress,swing_f_min2,swing_f_max2)) {
-			swing_struct.progress = swing_f_min2-swing_forgiveness;
+			sine_wave_set(swing_struct,swing_f_min2-swing_forgiveness);
 			_adj = true;
 		}
-		if (_adj) swing_struct.output = swing_struct.amplitude * sin(swing_struct.progress);
+		if (_adj) sine_wave_step(swing_struct);
 		
 		var _dir = 270 + swing_struct.output;
 		var _sx1 = (_swingx + lengthdir_x(_swingr,_dir));
