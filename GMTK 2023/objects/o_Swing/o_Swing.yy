@@ -1,13 +1,13 @@
 {
   "spriteId": {
-    "name": "s_Player",
-    "path": "sprites/s_Player/s_Player.yy",
+    "name": "s_Swing",
+    "path": "sprites/s_Swing/s_Swing.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": {
-    "name": "s_Player",
-    "path": "sprites/s_Player/s_Player.yy",
+    "name": "s_Swing",
+    "path": "sprites/s_Swing/s_Swing.yy",
   },
   "persistent": false,
   "parentObjectId": {
@@ -37,7 +37,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_Player",
+  "name": "o_Swing",
   "tags": [],
   "resourceType": "GMObject",
 }

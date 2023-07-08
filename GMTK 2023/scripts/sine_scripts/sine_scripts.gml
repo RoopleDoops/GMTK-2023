@@ -45,7 +45,20 @@ function sine_wave_step(_struct){
 	{
 		output = amplitude * sin(progress);
 		progress += (pi / wave_length);
-		if (progress >= (2*pi)) progress = 0;
+		if (progress >= (2*pi)) progress -= (2*pi);
+	}
+}
+
+/// @function		sine_wave_set()
+/// @description	Manually sets progress of a sine_wave and optional direction
+/// @param			_struct
+/// @param			_start
+/// @param			_dir
+function sine_wave_set(_struct,_start,_dir = 1){
+	with (_struct)
+	{
+		progress = _start;
+		if (_dir == -1) progress += pi;
 	}
 }
 
