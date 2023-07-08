@@ -18,8 +18,14 @@ key_down_pressed = 0;
 key_up_pressed = 0;
 key_action_pressed = 0;
 
+get_input_enabled = function() {
+	var _trans = instance_find(o_Transition,0);
+	if (_trans != noone) { return (input_enabled) && (_trans.state == TRANS_STATE.DONE)}
+	else return input_enabled;
+}
+
 get_input_press = function(_input){
-	if (input_enabled){
+	if (get_input_enabled()){
 		switch(_input){
 			case INPUT.LEFT:
 				key_left = keyboard_check_direct(ord("A"));
@@ -47,7 +53,7 @@ get_input_press = function(_input){
 }
 
 get_input_pressed = function(_input){
-	if (input_enabled){
+	if (get_input_enabled()){
 		switch(_input){
 			case INPUT.LEFT:
 				key_left_pressed = keyboard_check_pressed(ord("A"));

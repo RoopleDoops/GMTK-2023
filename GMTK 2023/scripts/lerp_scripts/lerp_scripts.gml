@@ -16,6 +16,18 @@ function lerp_create(_start,_target,_incr,_prog = 0){
 	return _struct;
 }
 
+/// @function		lerp_reset()
+/// @description	Resets lerp variables in a struct
+/// @param			_struct
+function lerp_reset(_struct){
+	with (_struct)
+	{
+		lerp_value = lerp_start;
+		lerp_prog = lerp_start;
+	}
+	return _struct;
+}
+
 /// @function		lerp_change()
 /// @description	Changes lerp variables in a struct
 /// @param			_struct

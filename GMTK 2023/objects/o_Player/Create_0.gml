@@ -4,52 +4,7 @@ movement_create();
 // PLAYER MOVEMENT NEEDS LERPING 
 ///////////////////////////////
 ////////////////////////////////
-// DRAWING
-scale_struct = scale_create();
-debug_draw = false;
-draw_x = x;
-draw_y = y;
-draw_angle = 0;
-draw_angle_target = 0;
-draw_swing_snap_lerp_base = 0;
-draw_swing_snap_lerp = draw_swing_snap_lerp_base;
-draw_swing_snap_lerp_incr = 0.05;
-draw_swing_snap_time_max = 0;
-draw_swing_snap_time = draw_swing_snap_time_max;
-head_y_difference = floor((bbox_top-bbox_bottom)/2); // difference from base of sprite to head rotation point.
-draw_coord_update = function(){#region
-	switch(move_state) {
-		case PLAYER_MOVE_STATE.SWING:
-			// delay x/y snap to let player lerp to swing
-			if (draw_swing_snap_time > 0) draw_swing_snap_time -=1; 
-			else {
-				// gradually increase lerp to 1
-				if (draw_swing_snap_lerp < 1) {
-					draw_swing_snap_lerp += draw_swing_snap_lerp_incr;
-					if (draw_swing_snap_lerp > 1) draw_swing_snap_lerp = 1;
-				}
-			}
-			draw_x = lerp(draw_x,x,draw_swing_snap_lerp);
-			draw_y = lerp(draw_y,y,draw_swing_snap_lerp);
-		break;
-		default:
-			draw_x = x; draw_y = y;
-		break;
-	}
-#endregion
-}
-draw_hair_length = sprite_get_height(s_PlayerHair);
-draw_hair = function() {#region
-	if (move_state == PLAYER_MOVE_STATE.SWING) {
-		var _length = point_distance(my_swing.x,my_swing.y,draw_x,draw_y) + head_y_difference;
-		var _angle = angle_normalize(point_direction(my_swing.x,my_swing.y,draw_x,draw_y) + 90);
-		var _yscale = _length/draw_hair_length;
-		draw_sprite_ext(s_PlayerHair,0,my_swing.x,my_swing.y,1,_yscale,_angle,image_blend,image_alpha);
-		draw_sprite(s_Swing,0,my_swing.x,my_swing.y);
-	}
-#endregion
-}
-//
+
 // MOVEMENT
 move_speed = 5;
 move_accel = 0.05;
@@ -76,7 +31,66 @@ swing_f_max2 = 3*pi/2 + swing_forgiveness;
 swing_control_cd_max = 15; // how long after swing before player can move horizontally
 swing_control_cd = swing_control_cd_max;
 //
-
+// DRAWING
+scale_struct = scale_create();
+debug_draw = false;
+face_dir = 1;
+dir_change_cd_max = 10;
+dir_change_cd = 0;
+draw_x = x;
+draw_y = y;
+draw_scalex = 1;
+draw_angle = 0;
+draw_angle_target = 0;
+draw_swing_snap_lerp_base = 0;
+draw_swing_snap_lerp = draw_swing_snap_lerp_base;
+draw_swing_snap_lerp_incr = 0.05;
+draw_swing_snap_time_max = 0;
+draw_swing_snap_time = draw_swing_snap_time_max;
+head_y_difference = floor((bbox_top-bbox_bottom)/2); // difference from base of sprite to head rotation point.
+draw_coord_update = function(){#region
+	switch(move_state) {
+		case PLAYER_MOVE_STATE.SWING:
+			// delay x/y snap to let player lerp to swing
+			if (draw_swing_snap_time > 0) draw_swing_snap_time -=1; 
+			else {
+				// gradually increase lerp to 1
+				if (draw_swing_snap_lerp < 1) {
+					draw_swing_snap_lerp += draw_swing_snap_lerp_incr;
+					if (draw_swing_snap_lerp > 1) draw_swing_snap_lerp = 1;
+				}
+			}
+			draw_x = lerp(draw_x,x,draw_swing_snap_lerp);
+			draw_y = lerp(draw_y,y,draw_swing_snap_lerp);
+			var _prog = swing_struct.progress;
+			if (within_range(_prog,0,swing_f_max1,false)) face_dir = 1;
+			else if (within_range(_prog,swing_f_max1,swing_f_max2,true)) face_dir = -1;
+			else face_dir = 1;
+		break;
+		default:
+			draw_x = x; draw_y = y;
+			if (move_hori != 0) face_dir = move_hori;
+		break;
+	}
+	if (face_dir != sign(draw_scalex)) {
+		if (dir_change_cd <= 0) {squash_scale(scale_struct,1.2,0.8); dir_change_cd = dir_change_cd_max;} 
+		draw_scalex = face_dir;
+	}
+	if (dir_change_cd > 0) dir_change_cd -=1;
+#endregion
+}
+draw_hair_length = sprite_get_height(s_PlayerHair);
+draw_hair = function() {#region
+	if (move_state == PLAYER_MOVE_STATE.SWING) {
+		var _length = point_distance(my_swing.x,my_swing.y,draw_x,draw_y) + head_y_difference;
+		var _angle = angle_normalize(point_direction(my_swing.x,my_swing.y,draw_x,draw_y) + 90);
+		var _yscale = _length/draw_hair_length;
+		draw_sprite_ext(s_PlayerHair,0,my_swing.x,my_swing.y,1,_yscale,_angle,image_blend,image_alpha);
+		draw_sprite(s_Swing,0,my_swing.x,my_swing.y);
+	}
+#endregion
+}
+//
 // STATE MACHINE
 enum PLAYER_MOVE_STATE {
 	GROUND,
@@ -90,7 +104,7 @@ change_state = function(_state){#region
 			my_swing = noone;
 			draw_angle_target = 0;
 			draw_angle = draw_angle_target;
-			squash_scale(scale_struct);
+			squash_scale(scale_struct,1.2,0.8);
 			swing_control_cd = 0;
 			jump_cd = 0;
 			move_gravity_total = 0;
@@ -109,7 +123,7 @@ change_state = function(_state){#region
 			o_Camera.camera_follow(_id);
 		break;
 		case PLAYER_MOVE_STATE.SWING:
-			squash_scale(scale_struct);
+			squash_scale(scale_struct,1.2,0.8);
 			swing_control_cd = 0;
 			release_cd = release_cd_max;
 			draw_swing_snap_time = draw_swing_snap_time_max;
@@ -179,7 +193,7 @@ perform_jump = function() {#region
 	if (jump_left > 0) {
 		jump_left -= 1;
 		y_move = jump_power;	
-		squash_scale(scale_struct);
+		squash_scale(scale_struct,1.2,0.8);
 		change_state(PLAYER_MOVE_STATE.AIR);
 	}
 #endregion
