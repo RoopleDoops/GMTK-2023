@@ -1,5 +1,5 @@
 draw_set_color(color);
-draw_set_alpha(0.25);
+draw_set_alpha(color_alpha);
 draw_circle(x,y,radius,false);
 draw_line(x-radius,y,x+radius,y);
 draw_set_alpha(1);

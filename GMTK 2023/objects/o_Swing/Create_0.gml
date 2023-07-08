@@ -2,8 +2,12 @@ radius = 96;
 color_extra = 10; // extra collision on color for player swinging (helps prevent flashing)
 col_extra = 20;
 col_radius = radius + col_extra;
-color_default = col_blue3;
-color_active = col_blue1;
+active = false;
+color_alpha_default = 0.25;
+color_alpha_active = 0.4;
+color_alpha = color_alpha_default;
+color_default = col_green2;
+color_active = col_green1;
 color = color_default;
 
 check_swing = function(_x1,_x2,_y1,_y2,_extra = 0) {
@@ -19,14 +23,17 @@ check_swing = function(_x1,_x2,_y1,_y2,_extra = 0) {
 }
 
 check_player_near = function() {
-	var _player_near = false;
 	if (instance_exists(o_Player)) {
 		var _p = o_Player;
-		_player_near = (o_Player.my_swing == id)
-		|| (check_swing(_p.bbox_left,_p.bbox_right,_p.bbox_top,_p.bbox_bottom,color_extra));
+		active = 
+		(o_Player.my_swing == id)
+		|| ((check_swing(_p.bbox_left,_p.bbox_right,_p.bbox_top,_p.bbox_bottom,color_extra)) 
+			&& (o_Player.move_state == PLAYER_MOVE_STATE.AIR));
 	}
-	if (_player_near) color = color_active;
-	else color = color_default;
+	else active = false;
+	
+	if (active) {color = color_active; color_alpha = color_alpha_active;}
+	else {color = color_default; color_alpha = color_alpha_default;}
 }
 
 perform_step = function() {

@@ -104,7 +104,6 @@ change_state = function(_state){#region
 			if (draw_angle >= 180) draw_angle -= 360; //prevents a 359 angle from rotating the long ways around.
 			draw_angle_target = 0;
 			my_swing = noone;
-			squash_scale(scale_struct);
 			// CAMERA UPDATE
 			var _id = id;
 			o_Camera.camera_follow(_id);
@@ -180,6 +179,7 @@ perform_jump = function() {#region
 	if (jump_left > 0) {
 		jump_left -= 1;
 		y_move = jump_power;	
+		squash_scale(scale_struct);
 		change_state(PLAYER_MOVE_STATE.AIR);
 	}
 #endregion
@@ -268,9 +268,15 @@ perform_move = function() {#region
 			
 	// COLLISION
 	x += _x_move;
-	if (bbox_bottom + _y_move < room_height) y += _y_move;
+	var _ground = collision_rectangle(bbox_left,y+_y_move,bbox_right,y+_y_move,o_Ground,false,false);
+	if (move_state == PLAYER_MOVE_STATE.AIR) && (_ground != noone) && (_ground.bbox_top > y) {
+		y = _ground.bbox_top-1;
+		movement_stop(AXIS.Y);
+		change_state(PLAYER_MOVE_STATE.GROUND);
+	}
+	else if (y + _y_move < room_height) y += _y_move;
 	else {
-		while (bbox_bottom + _y_move < room_height) y += sign(_y_move);
+		while (y + _y_move < room_height) y += sign(_y_move);
 		movement_stop(AXIS.Y);
 		/////////////////////////////////////////////////////////////
 		// THIS DOES NOT ACCOUNT FOR HITTING YOUR HEAD ON THINGS!!!!
@@ -288,6 +294,10 @@ perform_step = function() {
 			x_move = lerp(x_move,move_hori * move_speed,move_accel);
 			// JUMP
 			jump_check();
+			// GROUND CHECK
+			var _ground = collision_rectangle(bbox_left,y+1,bbox_right,y+1,o_Ground,false,false);
+			if (_ground == noone) {
+				change_state(PLAYER_MOVE_STATE.AIR);}
 			// MOVE & COLLIDE
 			perform_move();
 		break;
