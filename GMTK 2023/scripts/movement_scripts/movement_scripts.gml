@@ -43,7 +43,8 @@ function movement_calculate(){
 	
 		y_move_bank += y_move;
 		// Clamp y_move_bank to terminal velocity
-		y_move_bank = clamp(y_move_bank,-TERM_VELOC,TERM_VELOC);
+		// FALLING Y TERMINAL VELOCITY IS REDUCED
+		y_move_bank = clamp(y_move_bank,-TERM_VELOC,(TERM_VELOC/3));
 		var _y_move = sign(y_move_bank) * floor(abs(y_move_bank));
 		y_move_bank -= _y_move;
 		// Knockback decay

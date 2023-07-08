@@ -77,3 +77,4 @@ get_input_pressed = function(_input){
 set_input = function(_enabled){
 	input_enabled = _enabled;
 }
+
