@@ -1,8 +1,9 @@
-draw_set_color(color);
-draw_set_alpha(color_alpha);
-draw_circle(x,y,radius,false);
-draw_line(x-radius,y,x+radius,y);
-draw_set_alpha(1);
+//draw_set_color(color);
+//draw_set_alpha(color_alpha);
+//draw_circle(x,y,radius,false);
+//draw_line(x-radius,y,x+radius,y);
+//draw_set_alpha(1);
+draw_sprite_ext(s_SwingRadius96,0,x,y,1,1,0,color,color_alpha);
 //draw_set_color(c_red);
 //draw_circle(x,y,col_radius,true);
 //draw_line(x-col_radius,y,x+col_radius,y);

@@ -1,5 +1,3 @@
-#macro SCREEN_SHAKE o_Camera.camera_screen_shake(15,1)
-
 movement_create();
 
 enum CAMERA_STATE {
@@ -26,27 +24,15 @@ cam_zoom_incr = 1/90;
 cam_zoom_lerp = lerp_create(cam_zoom_cutscene, cam_zoom_play, cam_zoom_incr);
 camera_set_view_size(cam,GAME_WIDTH*cam_zoom,GAME_HEIGHT*cam_zoom);
 
-
-
 cam_x_half = camera_get_view_width(cam)/2;
 cam_y_half = camera_get_view_height(cam)/2;
-
-cam_x_buffer = 32;
-cam_y_buffer = 32;
 
 camera_frame_val = 125;
 camera_frame_val_centered = 75;
 
-shake_x = 0;
-shake_y = 0;
-shake_power = 0;
-shake_time = 0;
-shake_freq = 0;
-shake_freq_max = 2;
-
 follow = o_Player;
 move_accel_base = 0.04;
-move_accel_slow = 0.01;
+move_accel_slow = 0.005;
 move_accel_fast = 0.08;
 move_accel_accel = 0.1; // how fast to move BETWEEN move_accel values
 move_accel = move_accel_base;
@@ -74,11 +60,6 @@ camera_follow = function(_instance,_force=false){
 			follow = _instance;	
 		}
 	}
-}
-
-camera_screen_shake = function(_dur,_power){
-	shake_time = _dur;
-	shake_power = _power;
 }
 
 check_camera_in_framex = function(_framesize) {
@@ -137,7 +118,12 @@ camera_play = function() {
 }
 
 perform_step = function(){
-	if (!camera_setup) {camera_cutscene(); camera_snap(); camera_setup = true;}
+	if (!camera_setup) {
+		if (debug_mode) camera_play();
+		else camera_cutscene(); 
+		camera_snap(); 
+		camera_setup = true;
+	}
 	
 	switch (camera_state) {
 		case CAMERA_STATE.LOCK:
@@ -190,8 +176,8 @@ perform_step = function(){
 	x = x + _x_move;
 	y = y + _y_move;
 	
-	x = clamp(x,0+cam_x_half,room_width-cam_x_half) + shake_x;
-	y = clamp(y,0,room_height-cam_y_half)  + shake_y;
+	x = clamp(x,0+cam_x_half,room_width-cam_x_half);
+	y = clamp(y,0,room_height-cam_y_half);
 	
 	camera_set_view_pos(cam,round(x-cam_x_half),round(y-cam_y_half));
 }

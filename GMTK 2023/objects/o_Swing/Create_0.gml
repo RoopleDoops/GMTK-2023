@@ -3,11 +3,11 @@ color_extra = 10; // extra collision on color for player swinging (helps prevent
 col_extra = 20;
 col_radius = radius + col_extra;
 active = false;
-color_alpha_default = 0.25;
-color_alpha_active = 0.4;
+color_alpha_default = 0.75;
+color_alpha_active = 1;
 color_alpha = color_alpha_default;
-color_default = col_green2;
-color_active = col_green1;
+color_default = col_purple3;
+color_active = col_purple1;
 color = color_default;
 
 check_swing = function(_x1,_x2,_y1,_y2,_extra = 0) {
