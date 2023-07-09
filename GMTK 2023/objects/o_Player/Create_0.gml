@@ -5,6 +5,11 @@ movement_create();
 ///////////////////////////////
 ////////////////////////////////
 
+sound_jump = noone;
+sound_jump_swing = noone;
+sound_land = noone;
+sfx_swing_prog = 2;
+sfx_swing_prog_max = 2;
 // MOVEMENT
 move_speed = 5;
 move_accel = 0.05;
@@ -124,6 +129,14 @@ change_state = function(_state){#region
 			o_Camera.camera_follow(_id);
 		break;
 		case PLAYER_MOVE_STATE.SWING:
+			sfx_swing_prog += 1;
+			if (sfx_swing_prog > sfx_swing_prog_max) sfx_swing_prog = 0;
+			switch (sfx_swing_prog) {
+				case 0: var _sfx = sfx_whoosh1; break;	
+				case 1: var _sfx = sfx_whoosh2; break;
+				case 2: var _sfx = sfx_whoosh3; break;
+			}
+			audio_play_sound(_sfx,50,false);
 			squash_scale(scale_struct,1.2,0.8);
 			swing_control_cd = 0;
 			release_cd = release_cd_max;
@@ -158,6 +171,7 @@ change_state = function(_state){#region
 			sine_wave_set(swing_struct,_prog,_wavedir);
 		break;
 		case PLAYER_MOVE_STATE.WIN:
+			audio_play_sound(sfx_win,75,false);
 			movement_stop(AXIS.X);
 			movement_stop(AXIS.Y);
 			my_swing = noone;
@@ -171,7 +185,7 @@ change_state = function(_state){#region
 #endregion
 }
 win_time = 0;
-win_time_max = 120;
+win_time_max = 90;
 //
 
 // INPUT
@@ -203,6 +217,9 @@ jump_check = function() {#region
 
 perform_jump = function() {#region
 	if (jump_left > 0) {
+		var _pitch = choose(0.9,1,1.1);
+		sound_jump = audio_play_sound(sfx_jump,80,false);
+		audio_sound_pitch(sound_jump,_pitch);
 		jump_left -= 1;
 		y_move = jump_power;	
 		squash_scale(scale_struct,1.2,0.8);
@@ -257,6 +274,7 @@ perform_swing = function() {#region
 	}
 	
 	if (key_action) && (release_cd <=0) {
+		audio_play_sound(sfx_jump_swing,80,false);
 		// Leniency to prevent player from launching downwards if they barely miss the top of the swing
 		var _adj = false;
 		if (within_range(swing_struct.progress,swing_f_min1,swing_f_max1)) {
@@ -302,6 +320,12 @@ perform_move = function() {#region
 
 	var _ground = collision_rectangle(bbox_left,y+_y_move,bbox_right,y+_y_move,o_Ground,false,false);
 	if (move_state == PLAYER_MOVE_STATE.AIR) && (_ground != noone) && (_ground.bbox_top > y) {
+		if (_ground.object_index == o_Ground) var _sfx = sfx_land_grass;
+		else var _sfx = sfx_land_wood;
+		var _pitch = choose(0.9,1,1.1);
+		sound_land = audio_play_sound(_sfx,80,false);
+		audio_sound_pitch(sound_land,_pitch);
+		
 		y = _ground.bbox_top-1;
 		movement_stop(AXIS.Y);
 		change_state(PLAYER_MOVE_STATE.GROUND);
