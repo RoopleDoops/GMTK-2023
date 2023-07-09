@@ -24,6 +24,7 @@ get_next_room = function() {
 	switch (room) {
 		case r_L1: return r_L2; break;
 		case r_L2: return r_L3; break;
+		case r_L3: return r_L4; break;
 		default: return r_Title; break;
 	}
 }
@@ -66,7 +67,7 @@ perform_step = function() {
 			lerp_step(fade_lerp);
 			draw_alpha = 1 - fade_lerp.lerp_value;
 			if (lerp_finished(fade_lerp)) {
-				o_InputManager.set_input(true);
+				if (!instance_exists(o_Camera)) o_InputManager.set_input(true);
 				change_state(TRANS_STATE.DONE);
 			}
 		break;

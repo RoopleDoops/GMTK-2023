@@ -14,3 +14,5 @@ if (debug_mode)
 	}
 #endregion
 }
+
+if (input_enabled) && (keyboard_check_pressed(vk_escape)) game_end();

@@ -2,20 +2,20 @@
   "bboxMode": 0,
   "collisionKind": 1,
   "type": 0,
-  "origin": 4,
+  "origin": 0,
   "preMultiplyAlpha": false,
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 0,
-  "bbox_right": 95,
-  "bbox_top": 0,
-  "bbox_bottom": 95,
+  "bbox_left": 36,
+  "bbox_right": 386,
+  "bbox_top": 9,
+  "bbox_bottom": 431,
   "HTile": false,
   "VTile": false,
   "For3D": false,
-  "width": 96,
-  "height": 96,
+  "width": 432,
+  "height": 432,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,9 +24,9 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"9c6f654e-d043-4420-b262-aecfc4a78227","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"9c6f654e-d043-4420-b262-aecfc4a78227","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"LayerId":{"name":"54c72ca6-f533-4638-a854-d625bea5ff22","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"s_TitleScreen","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"resourceVersion":"1.0","name":"9c6f654e-d043-4420-b262-aecfc4a78227","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"03dc0972-dee0-467b-b2e0-147a0dfd00f0","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"03dc0972-dee0-467b-b2e0-147a0dfd00f0","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"LayerId":{"name":"65101439-ebd6-47b8-8cc7-cec2f0c4e1b2","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"s_TitleScreen","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"resourceVersion":"1.0","name":"03dc0972-dee0-467b-b2e0-147a0dfd00f0","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"s_TitleScreen","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"88cb32b8-df3d-4b46-a764-186c4c425060","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"9c6f654e-d043-4420-b262-aecfc4a78227","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"35a82558-15ba-46cb-b71b-c794f3f62007","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"03dc0972-dee0-467b-b2e0-147a0dfd00f0","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -54,8 +54,8 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 48,
-    "yorigin": 48,
+    "xorigin": 0,
+    "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"s_TitleScreen","path":"sprites/s_TitleScreen/s_TitleScreen.yy",},
@@ -65,7 +65,7 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"54c72ca6-f533-4638-a854-d625bea5ff22","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"65101439-ebd6-47b8-8cc7-cec2f0c4e1b2","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {

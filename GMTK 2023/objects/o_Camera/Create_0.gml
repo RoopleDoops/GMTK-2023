@@ -85,7 +85,7 @@ check_camera_in_frame = function(_framesize) {
 check_player_on_screen = function() {
 	if (instance_exists(o_Player)) {
 		if (within_range(o_Player.x,x-cam_x_half,x+cam_x_half))
-		&& (within_range(o_Player.y,y+cam_y_half,y-cam_y_half)) return true;
+		&& (within_range(o_Player.y,y+(cam_y_half-48),y-cam_y_half)) return true;
 	}
 }
 
@@ -137,6 +137,7 @@ perform_step = function(){
 			if (check_player_on_screen()) camera_play();	
 		break;
 		case CAMERA_STATE.PLAY:
+			o_InputManager.set_input(true);
 			camera_zoom_step();
 		break;
 	}

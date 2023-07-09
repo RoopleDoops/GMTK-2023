@@ -1,0 +1,1 @@
+o_Transition.change_state(TRANS_STATE.TO_CLEAR);

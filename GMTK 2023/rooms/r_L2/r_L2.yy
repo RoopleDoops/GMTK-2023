@@ -27,6 +27,7 @@
         {"properties":[],"isDnd":false,"objectId":{"name":"o_Swing","path":"objects/o_Swing/o_Swing.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":696.0,"y":648.0,"resourceVersion":"1.0","name":"inst_2557571B","tags":[],"resourceType":"GMRInstance",},
         {"properties":[],"isDnd":false,"objectId":{"name":"o_Swing","path":"objects/o_Swing/o_Swing.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":264.0,"y":576.0,"resourceVersion":"1.0","name":"inst_1F94B4A7","tags":[],"resourceType":"GMRInstance",},
         {"properties":[],"isDnd":false,"objectId":{"name":"o_Swing","path":"objects/o_Swing/o_Swing.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":264.0,"y":312.0,"resourceVersion":"1.0","name":"inst_42B0BBB4","tags":[],"resourceType":"GMRInstance",},
+        {"properties":[],"isDnd":false,"objectId":{"name":"o_Swing","path":"objects/o_Swing/o_Swing.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":696.0,"y":312.0,"resourceVersion":"1.0","name":"inst_79070E98","tags":[],"resourceType":"GMRInstance",},
       ],"visible":true,"depth":200,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":24,"gridY":24,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Swings","tags":[],"resourceType":"GMRInstanceLayer",},
     {"instances":[
         {"properties":[],"isDnd":false,"objectId":{"name":"o_Ground","path":"objects/o_Ground/o_Ground.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":20.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":0.0,"y":1440.0,"resourceVersion":"1.0","name":"inst_5A6A6070","tags":[],"resourceType":"GMRInstance",},
@@ -151,6 +152,7 @@
     {"name":"inst_7059C89","path":"rooms/r_L2/r_L2.yy",},
     {"name":"inst_37C09B1A","path":"rooms/r_L2/r_L2.yy",},
     {"name":"inst_196D6239","path":"rooms/r_L2/r_L2.yy",},
+    {"name":"inst_79070E98","path":"rooms/r_L2/r_L2.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,

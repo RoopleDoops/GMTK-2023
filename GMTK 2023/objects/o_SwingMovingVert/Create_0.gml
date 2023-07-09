@@ -1,6 +1,6 @@
 event_inherited();
 movement_create();
-move_speed = 2;
+move_speed = 4;
 //y_limit = 200; //var def
 yend = ystart + y_limit;
 y_move = move_speed;
