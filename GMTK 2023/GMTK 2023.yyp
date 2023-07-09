@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"s_Balcony","path":"sprites/s_Balcony/s_Balcony.yy",},"order":17,},
+    {"id":{"name":"o_Speech","path":"objects/o_Speech/o_Speech.yy",},"order":12,},
     {"id":{"name":"sine_scripts","path":"scripts/sine_scripts/sine_scripts.yy",},"order":7,},
     {"id":{"name":"math_scripts","path":"scripts/math_scripts/math_scripts.yy",},"order":4,},
     {"id":{"name":"s_CastleTiles","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},"order":4,},
@@ -8,9 +9,9 @@
     {"id":{"name":"s_Speech1","path":"sprites/s_Speech1/s_Speech1.yy",},"order":20,},
     {"id":{"name":"nineslice_fix_script","path":"scripts/nineslice_fix_script/nineslice_fix_script.yy",},"order":5,},
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":4,},
-    {"id":{"name":"s_Speech2","path":"sprites/s_Speech2/s_Speech2.yy",},"order":19,},
     {"id":{"name":"scaling_scripts","path":"scripts/scaling_scripts/scaling_scripts.yy",},"order":5,},
     {"id":{"name":"lerp_scripts","path":"scripts/lerp_scripts/lerp_scripts.yy",},"order":8,},
+    {"id":{"name":"s_Speech2","path":"sprites/s_Speech2/s_Speech2.yy",},"order":21,},
     {"id":{"name":"collision_scripts","path":"scripts/collision_scripts/collision_scripts.yy",},"order":1,},
     {"id":{"name":"t_Castle","path":"tilesets/t_Castle/t_Castle.yy",},"order":0,},
     {"id":{"name":"o_Balcony","path":"objects/o_Balcony/o_Balcony.yy",},"order":11,},

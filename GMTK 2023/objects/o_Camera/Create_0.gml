@@ -14,7 +14,9 @@ yTo = y;
 
 // CUTSCENE
 cutscene_time = 0;
-cutscene_time_max = 120;
+cutscene_time_max = 300;
+cutscene_msg1_time = 30;
+cutscene_msg2_time = 150;
 
 cam = view_camera[0];
 cam_zoom_cutscene = 0.5;
@@ -119,8 +121,10 @@ perform_step = function(){
 	
 	switch (camera_state) {
 		case CAMERA_STATE.LOCK:
-			if (cutscene_time >= cutscene_time_max) camera_pan(o_Player);
+			if (cutscene_time >= cutscene_time_max) {o_Knight.progress_speech(0); camera_pan(o_Player)};
 			else cutscene_time += 1;
+			if (cutscene_time == cutscene_msg1_time) o_Knight.progress_speech(1);
+			else if (cutscene_time == cutscene_msg2_time) o_Knight.progress_speech(2);
 		break;
 		case CAMERA_STATE.PAN:
 			if (check_camera_in_frame(camera_frame_val_centered)) camera_play();	
