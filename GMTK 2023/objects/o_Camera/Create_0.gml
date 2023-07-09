@@ -32,7 +32,7 @@ camera_frame_val_centered = 75;
 
 follow = o_Player;
 move_accel_base = 0.04;
-move_accel_slow = 0.005;
+move_accel_slow = 0.0075;
 move_accel_fast = 0.08;
 move_accel_accel = 0.1; // how fast to move BETWEEN move_accel values
 move_accel = move_accel_base;

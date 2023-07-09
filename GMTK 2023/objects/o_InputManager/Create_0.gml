@@ -6,6 +6,10 @@ enum INPUT {
 	ACTION
 }
 
+song = audio_play_sound(bgm_Rapunzel,100,true);
+audio_sound_gain(song,0,0);
+audio_sound_gain(song,100,300);
+
 input_enabled = true;
 key_left = 0;
 key_right = 0;

@@ -170,6 +170,8 @@ change_state = function(_state){#region
 	move_state = _state;
 #endregion
 }
+win_time = 0;
+win_time_max = 120;
 //
 
 // INPUT
@@ -291,7 +293,13 @@ perform_move = function() {#region
 	var _y_move = _move[AXIS.Y];
 			
 	// COLLISION
-	x += _x_move;
+	var _xbuff = 16;
+	if (x + _x_move > 0+_xbuff) && (x + _x_move < room_width-_xbuff) x += _x_move;
+	else {
+		while (x + _x_move > 0+_xbuff) && (x + _x_move < room_width-_xbuff) x += sign(_x_move);
+		movement_stop(AXIS.X);
+	}
+
 	var _ground = collision_rectangle(bbox_left,y+_y_move,bbox_right,y+_y_move,o_Ground,false,false);
 	if (move_state == PLAYER_MOVE_STATE.AIR) && (_ground != noone) && (_ground.bbox_top > y) {
 		y = _ground.bbox_top-1;
@@ -359,7 +367,8 @@ perform_step = function() {
 		break;
 		
 		case PLAYER_MOVE_STATE.WIN:
-			
+			if (win_time == win_time_max) o_Transition.room_change(o_Transition.get_next_room());
+			win_time += 1;
 		break;
 	}
 	draw_coord_update();

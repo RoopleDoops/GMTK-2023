@@ -20,6 +20,14 @@ room_change = function(_room) {
 	room_to = _room;
 }
 
+get_next_room = function() {
+	switch (room) {
+		case r_L1: return r_L2; break;
+		case r_L2: return r_L3; break;
+		default: return r_Title; break;
+	}
+}
+
 
 change_state = function(_state,_time) {
 	switch(_state) {
