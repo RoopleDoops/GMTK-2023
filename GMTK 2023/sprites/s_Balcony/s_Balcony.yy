@@ -1,5 +1,5 @@
 {
-  "bboxMode": 0,
+  "bboxMode": 1,
   "collisionKind": 1,
   "type": 0,
   "origin": 0,
@@ -8,28 +8,28 @@
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
   "bbox_left": 0,
-  "bbox_right": 143,
-  "bbox_top": 48,
-  "bbox_bottom": 239,
+  "bbox_right": 95,
+  "bbox_top": 0,
+  "bbox_bottom": 95,
   "HTile": false,
   "VTile": false,
   "For3D": false,
-  "width": 144,
-  "height": 288,
+  "width": 96,
+  "height": 96,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
   },
   "swatchColours": null,
-  "gridX": 6,
-  "gridY": 6,
+  "gridX": 0,
+  "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"043e62a8-f45d-440f-92b1-31e1dc5a258c","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"043e62a8-f45d-440f-92b1-31e1dc5a258c","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},"LayerId":{"name":"23447c70-9f7f-43a7-b58b-6ef3b48984c7","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"s_CastleTiles","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},"resourceVersion":"1.0","name":"043e62a8-f45d-440f-92b1-31e1dc5a258c","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"85363437-51f2-4c38-ab6c-b8d4db105b71","path":"sprites/s_Balcony/s_Balcony.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"85363437-51f2-4c38-ab6c-b8d4db105b71","path":"sprites/s_Balcony/s_Balcony.yy",},"LayerId":{"name":"8e61f76b-bf36-4971-822b-e03e22f25c47","path":"sprites/s_Balcony/s_Balcony.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"s_Balcony","path":"sprites/s_Balcony/s_Balcony.yy",},"resourceVersion":"1.0","name":"85363437-51f2-4c38-ab6c-b8d4db105b71","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"s_CastleTiles","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},
+    "spriteId": {"name":"s_Balcony","path":"sprites/s_Balcony/s_Balcony.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 12.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"8eece56a-e048-4518-8cb9-15e6f33120ad","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"043e62a8-f45d-440f-92b1-31e1dc5a258c","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"676a163f-dd03-486a-8f51-d0846df0b8b4","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"85363437-51f2-4c38-ab6c-b8d4db105b71","path":"sprites/s_Balcony/s_Balcony.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -58,14 +58,14 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"s_CastleTiles","path":"sprites/s_CastleTiles/s_CastleTiles.yy",},
+    "parent": {"name":"s_Balcony","path":"sprites/s_Balcony/s_Balcony.yy",},
     "resourceVersion": "1.3",
-    "name": "s_CastleTiles",
+    "name": "s_Balcony",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"23447c70-9f7f-43a7-b58b-6ef3b48984c7","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"8e61f76b-bf36-4971-822b-e03e22f25c47","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
@@ -73,7 +73,7 @@
     "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
-  "name": "s_CastleTiles",
+  "name": "s_Balcony",
   "tags": [],
   "resourceType": "GMSprite",
 }

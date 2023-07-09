@@ -95,7 +95,8 @@ draw_hair = function() {#region
 enum PLAYER_MOVE_STATE {
 	GROUND,
 	AIR,
-	SWING
+	SWING,
+	WIN
 }
 move_state = PLAYER_MOVE_STATE.AIR;
 change_state = function(_state){#region
@@ -155,6 +156,14 @@ change_state = function(_state){#region
 			var _output = _dir - 270;
 			var _prog = arcsin(_output/swing_struct.amplitude)*_wavedir;
 			sine_wave_set(swing_struct,_prog,_wavedir);
+		break;
+		case PLAYER_MOVE_STATE.WIN:
+			movement_stop(AXIS.X);
+			movement_stop(AXIS.Y);
+			my_swing = noone;
+			draw_angle_target = 0;
+			draw_angle = draw_angle_target;
+			squash_scale(scale_struct,1.2,0.8);
 		break;
 	}
 	move_state = _state;
@@ -297,6 +306,10 @@ perform_move = function() {#region
 		/////////////////////////////////////////////////////////////
 		change_state(PLAYER_MOVE_STATE.GROUND);
 	}
+	
+	if (move_state == PLAYER_MOVE_STATE.GROUND) && (place_meeting(x,y,o_Balcony)) {
+		change_state(PLAYER_MOVE_STATE.WIN);	
+	}
 #endregion
 }
 
@@ -342,6 +355,10 @@ perform_step = function() {
 			if (release_cd > 0) release_cd -= 1;
 			//if (within_range(swing_struct.progress,swing_f_min1,swing_f_max1)) debug_draw = true;
 			//else debug_draw = false;
+		break;
+		
+		case PLAYER_MOVE_STATE.WIN:
+			
 		break;
 	}
 	draw_coord_update();
