@@ -22,9 +22,11 @@ cam = view_camera[0];
 cam_zoom_cutscene = 0.5;
 cam_zoom_play = 1;
 cam_zoom = cam_zoom_cutscene;
-cam_zoom_incr = 1/60;
+cam_zoom_incr = 1/90;
 cam_zoom_lerp = lerp_create(cam_zoom_cutscene, cam_zoom_play, cam_zoom_incr);
 camera_set_view_size(cam,GAME_WIDTH*cam_zoom,GAME_HEIGHT*cam_zoom);
+
+
 
 cam_x_half = camera_get_view_width(cam)/2;
 cam_y_half = camera_get_view_height(cam)/2;
@@ -80,16 +82,16 @@ camera_screen_shake = function(_dur,_power){
 }
 
 check_camera_in_framex = function(_framesize) {
-	if (follow.x < 0 + cam_x_half)
-	|| (follow.x > room_width - cam_x_half) return true;
+	if (follow.x < 0 + (cam_x_half*cam_zoom))
+	|| (follow.x > room_width - (cam_x_half*cam_zoom)) return true;
 	else if (x - follow.x > _framesize)
 	|| (follow.x - x > _framesize) return false;
 	else return true;
 }
 
 check_camera_in_framey = function(_framesize) {
-	if (follow.y < 0 + cam_y_half)
-	|| (follow.y > room_height - cam_y_half) return true;
+	if (follow.y < 0 + (cam_y_half*cam_zoom))
+	|| (follow.y > room_height - (cam_y_half*cam_zoom)) return true;
 	else if (y - follow.y > _framesize)
 	|| (follow.y - y > _framesize) return false;
 	else return true;
@@ -97,6 +99,22 @@ check_camera_in_framey = function(_framesize) {
 
 check_camera_in_frame = function(_framesize) {
 	return (check_camera_in_framex(_framesize)) && (check_camera_in_framey(_framesize))
+}
+
+check_player_on_screen = function() {
+	if (instance_exists(o_Player)) {
+		if (within_range(o_Player.x,x-cam_x_half,x+cam_x_half))
+		&& (within_range(o_Player.y,y+cam_y_half,y-cam_y_half)) return true;
+	}
+}
+
+camera_zoom_step = function() {
+	// CAM ZOOM
+	lerp_step(cam_zoom_lerp);
+	cam_zoom = cam_zoom_lerp.lerp_value;
+	camera_set_view_size(cam,GAME_WIDTH*cam_zoom,GAME_HEIGHT*cam_zoom);
+	cam_x_half = camera_get_view_width(cam)/2;
+	cam_y_half = camera_get_view_height(cam)/2;	
 }
 
 camera_cutscene = function() {
@@ -107,12 +125,14 @@ camera_cutscene = function() {
 camera_pan = function(_follow) {
 	camera_state = CAMERA_STATE.PAN;
 	camera_follow(_follow,true);
+	move_accel_target = move_accel_slow;
 	move_accel = move_accel_slow;
 }
 
 camera_play = function() {
 	camera_state = CAMERA_STATE.PLAY;
 	camera_follow(o_Player,true);
+	move_accel_target = move_accel_base;
 	move_accel = move_accel_base;
 }
 
@@ -127,32 +147,13 @@ perform_step = function(){
 			else if (cutscene_time == cutscene_msg2_time) o_Knight.progress_speech(2);
 		break;
 		case CAMERA_STATE.PAN:
-			if (check_camera_in_frame(camera_frame_val_centered)) camera_play();	
+			camera_zoom_step();
+			if (check_player_on_screen()) camera_play();	
 		break;
 		case CAMERA_STATE.PLAY:
-			// CAM ZOOM
-			lerp_step(cam_zoom_lerp);
-			cam_zoom = cam_zoom_lerp.lerp_value;
-			camera_set_view_size(cam,GAME_WIDTH*cam_zoom,GAME_HEIGHT*cam_zoom);
-			cam_x_half = camera_get_view_width(cam)/2;
-			cam_y_half = camera_get_view_height(cam)/2;
+			camera_zoom_step();
 		break;
 	}
-	
-	if (shake_time > 0) 
-	{
-		shake_time -= 1;
-		if (shake_freq > 0) shake_freq -= 1;
-		else
-		{
-			shake_freq = shake_freq_max;
-			if (shake_x == 0) shake_x = choose(-shake_power,shake_power);
-			else shake_x = -shake_x;
-			if (shake_y == 0) shake_y = choose(-shake_power,shake_power);
-			else shake_y = -shake_y;
-		}
-	}
-	if (shake_time == 0) {shake_x = 0; shake_y = 0; shake_power = 0;}
 	
 	if (instance_exists(follow))
 	{
@@ -160,18 +161,16 @@ perform_step = function(){
 		xTo = round(follow.x);
 		yTo = round(follow.y);
 		
-		// Increase move_accel if camera is lagging behind
-		if (!check_camera_in_frame(camera_frame_val)) move_accel_target = move_accel_fast;
-		if (move_accel_target == move_accel_fast) && (check_camera_in_frame(camera_frame_val_centered)) {
-			move_accel_target = move_accel_base;	
+		if (camera_state == CAMERA_STATE.PLAY) {
+			// Increase move_accel if camera is lagging behind
+			if (!check_camera_in_frame(camera_frame_val)) move_accel_target = move_accel_fast;
+			if (move_accel_target == move_accel_fast) && (check_camera_in_frame(camera_frame_val_centered)) {
+				move_accel_target = move_accel_base;	
+			}
+			move_accel = lerp(move_accel,move_accel_target,move_accel_accel);
 		}
-		
-		move_accel = lerp(move_accel,move_accel_target,move_accel_accel);
-	
 		x_move = lerp(x,xTo,move_accel)-x;
-		y_move = lerp(y,yTo,move_accel)-y;
-		//x_move = -(x - xTo) * move_accel;
-		//y_move = -(y - yTo) * move_accel;
+		y_move = lerp(y,yTo,move_accel)-y;	
 	}
 	
 	

@@ -16,6 +16,7 @@
     {"id":{"name":"t_Castle","path":"tilesets/t_Castle/t_Castle.yy",},"order":0,},
     {"id":{"name":"o_Balcony","path":"objects/o_Balcony/o_Balcony.yy",},"order":11,},
     {"id":{"name":"r_Title","path":"rooms/r_Title/r_Title.yy",},"order":2,},
+    {"id":{"name":"s_Speech3","path":"sprites/s_Speech3/s_Speech3.yy",},"order":22,},
     {"id":{"name":"o_SwingMoving","path":"objects/o_SwingMoving/o_SwingMoving.yy",},"order":7,},
     {"id":{"name":"s_Knight","path":"sprites/s_Knight/s_Knight.yy",},"order":18,},
     {"id":{"name":"s_Ground","path":"sprites/s_Ground/s_Ground.yy",},"order":12,},
