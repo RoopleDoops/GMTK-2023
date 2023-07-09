@@ -8,6 +8,9 @@ draw_speech = function() {
 	case 2:
 		draw_sprite(s_Speech2,0,x,y);
 	break;
+	case 3:
+		draw_sprite(s_Speech3,0,x,y);
+	break;
 	default:
 	break;
 	}

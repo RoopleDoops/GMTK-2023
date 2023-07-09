@@ -163,6 +163,7 @@ change_state = function(_state){#region
 			my_swing = noone;
 			draw_angle_target = 0;
 			draw_angle = draw_angle_target;
+			o_Knight.progress_speech(3);
 			squash_scale(scale_struct,1.2,0.8);
 		break;
 	}
